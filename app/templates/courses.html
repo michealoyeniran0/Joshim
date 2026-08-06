@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses — Joshim</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="wrap">
+        <header class="site-nav">
+            <a href="/" class="brand" style="text-decoration:none;">Joshim</a>
+            <nav>
+                {% if current_user.is_authenticated %}
+                    <span style="color:var(--slate); font-size:0.9rem;">Hi, {{ current_user.name.split(' ')[0] }}</span>
+                    <a href="/student">My courses</a>
+                    <a href="/logout" class="nav-cta">Log out</a>
+                {% else %}
+                    <a href="/register-page">My courses</a>
+                    <a href="/login-page" class="nav-cta">Log in</a>
+                {% endif %}
+            </nav>
+        </header>
+
+        <section style="padding: 50px 0 10px 0;">
+            <div class="eyebrow" style="font-family:var(--font-mono); font-size:0.8rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--accent-deep); margin-bottom:12px;">
+                Courses
+            </div>
+            <h2 style="font-size: clamp(1.8rem, 4vw, 2.4rem); max-width: 20ch;">
+                Find the right class for your child
+            </h2>
+            <p style="color: var(--slate); max-width: 50ch; margin-top: 10px;">
+                Every course below is a live, tutor-led class. Enroll, then pay
+                to unlock access — no subscriptions.
+            </p>
+        </section>
+
+        <div id="courseList"></div>
+
+        <footer class="site-footer">
+            <div>© 2026 Joshim. Online tutoring for kids.</div>
+            <div><a href="/legal">Terms & Privacy</a> · <a href="/">Home</a></div>
+        </footer>
+    </div>
+
+    <script>
+        window.isLoggedIn = {{ current_user.is_authenticated | tojson }};
+    </script>
+    <script src="{{ url_for('static', filename='courses.js') }}?v={{ range(1, 99999) | random }}"></script>
+
+</body>
+</html>

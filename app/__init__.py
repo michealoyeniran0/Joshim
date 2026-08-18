@@ -1,3 +1,4 @@
+from flask_wtf.csrf import CSRFProtect
 from flask_mail import Mail
 from flask import Flask
 from flask_login import LoginManager
@@ -10,6 +11,7 @@ limiter = Limiter(key_func=get_remote_address)
 
 login_manager = LoginManager()
 mail = Mail()
+csrf = CSRFProtect()
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
@@ -19,6 +21,8 @@ def create_app():
 
     # Load configuration
     app.config.from_object(Config)
+    
+    csrf.init_app(app)
 
     # Initialize database
     db.init_app(app)

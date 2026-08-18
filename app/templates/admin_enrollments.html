@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Enrollments — Joshim Admin</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+<div class="wrap">
+
+
+<header class="site-nav">
+
+<a href="/admin" class="brand">
+Joshim Admin
+</a>
+
+
+<nav>
+
+<a href="/admin">
+Dashboard
+</a>
+
+<a href="/logout" class="nav-cta">
+Logout
+</a>
+
+</nav>
+
+</header>
+
+
+
+<section style="padding:50px 0 20px;">
+
+<div class="eyebrow">
+Enrollment Management
+</div>
+
+<h2>
+All Student Enrollments
+</h2>
+
+</section>
+
+
+
+<div class="table-container">
+
+<table class="admin-table">
+
+
+<thead>
+
+<tr>
+
+<th>
+Student
+</th>
+
+<th>
+Child
+</th>
+
+<th>
+Course
+</th>
+
+<th>
+Status
+</th>
+
+<th>
+Access Code
+</th>
+
+<th>
+Date
+</th>
+
+</tr>
+
+</thead>
+
+
+
+<tbody>
+
+
+{% for enrollment in enrollments %}
+
+<tr>
+
+<td>
+
+{{ enrollment.user.name }}
+
+<br>
+
+<span style="font-size:0.85rem;">
+{{ enrollment.user.email }}
+</span>
+
+</td>
+
+
+<td>
+
+{{ enrollment.user.child_name or "Not provided" }}
+
+</td>
+
+
+
+<td>
+
+{{ enrollment.course.title }}
+
+</td>
+
+
+
+<td>
+
+{% if enrollment.paid %}
+
+<span style="color:var(--accent-deep);">
+✓ Paid
+</span>
+
+{% else %}
+
+<span style="color:var(--danger);">
+Pending
+</span>
+
+{% endif %}
+
+
+</td>
+
+
+
+<td>
+
+{{ enrollment.access_code or "Not generated" }}
+
+</td>
+
+
+
+<td>
+
+{{ enrollment.enrolled_at.strftime("%d %b %Y") }}
+
+</td>
+
+
+</tr>
+
+
+{% endfor %}
+
+
+</tbody>
+
+
+</table>
+
+
+</div>
+
+
+
+<footer class="site-footer">
+
+<div>
+© 2026 Joshim. Online tutoring for kids.
+</div>
+
+</footer>
+
+
+</div>
+
+
+</body>
+
+</html>

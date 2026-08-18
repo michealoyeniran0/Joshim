@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>My Profile — Joshim</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
@@ -17,39 +18,66 @@
             </nav>
         </header>
 
-        <section style="padding: 50px 0 10px 0;">
+        <section style="padding:50px 0 10px 0;">
             <div style="font-family:var(--font-mono); font-size:0.8rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--accent-deep); margin-bottom:12px;">
                 Profile
             </div>
-            <h2 style="font-size: clamp(1.8rem, 4vw, 2.4rem);">My profile</h2>
+
+            <h2 style="font-size:clamp(1.8rem, 4vw, 2.4rem);">
+                My profile
+            </h2>
         </section>
 
-        <div class="card" style="max-width: 440px; margin-bottom: 60px;">
+        <div class="card" style="max-width:440px; margin-bottom:60px;">
+
             <div style="display:flex; align-items:center; gap:18px; margin-bottom:20px;">
-                <img id="profileImg" src="/static/uploads/default.png"
+
+                <img id="profileImg"
+                     src="/static/uploads/default.png"
                      onerror="this.style.display='none'"
                      style="width:80px; height:80px; border-radius:50%; object-fit:cover; background:var(--line);">
+
                 <div>
-                    <div id="profileName" style="font-family: var(--font-display); font-size:1.2rem;"></div>
-                    <div id="profileEmail" style="color: var(--slate); font-size:0.9rem;"></div>
-                    <div id="profilePhone" style="color: var(--slate); font-size:0.9rem;"></div>
+                    <div id="profileName" style="font-family:var(--font-display); font-size:1.2rem;"></div>
+                    <div id="profileEmail" style="color:var(--slate); font-size:0.9rem;"></div>
+                    <div id="profilePhone" style="color:var(--slate); font-size:0.9rem;"></div>
                 </div>
+
             </div>
 
+
             <form id="uploadForm">
-                <label style="font-size:0.9rem; color:var(--slate);">Update profile photo</label>
+
+                <label style="font-size:0.9rem; color:var(--slate);">
+                    Update profile photo
+                </label>
+
                 <input type="file" id="photoInput" accept="image/*">
-                <button type="submit" class="btn btn-accent" style="width:100%; margin-top:10px;">Upload photo</button>
-                <p id="uploadResponse" style="text-align:center; margin-top:10px; font-size:0.9rem; color:var(--slate);"></p>
+
+                <button type="submit"
+                class="btn btn-accent"
+                style="width:100%; margin-top:10px;">
+                    Upload photo
+                </button>
+
+                <p id="uploadResponse"
+                style="text-align:center; margin-top:10px; font-size:0.9rem; color:var(--slate);">
+                </p>
+
             </form>
+
         </div>
+
 
         <footer class="site-footer">
             <div>© 2026 Joshim. Online tutoring for kids.</div>
             <div><a href="/">Home</a></div>
         </footer>
+
     </div>
 
+
+    <script src="{{ url_for('static', filename='csrf.js') }}"></script>
     <script src="{{ url_for('static', filename='profile.js') }}"></script>
 
 </body>

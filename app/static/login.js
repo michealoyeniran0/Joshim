@@ -11,7 +11,8 @@ form.addEventListener("submit", async (e) => {
     const res = await fetch("/login", {
         method: "POST",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "X-CSRFToken": document.querySelector('meta[name="csrf-token"]').content
         },
         body: JSON.stringify(data)
     });

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Users | Admin</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="wrap">
+
+<header class="site-nav">
+
+<a href="/admin" class="brand">
+Joshim Admin
+</a>
+
+<nav>
+<a href="/admin">
+Dashboard
+</a>
+
+<a href="/logout" class="nav-cta">
+Logout
+</a>
+</nav>
+
+</header>
+
+
+<section style="padding:50px 0 20px 0;">
+
+<h2>
+Registered Users
+</h2>
+
+</section>
+
+
+<div class="course-container">
+
+{% for user in users %}
+
+<div class="card">
+
+<h3>
+{{ user.name }}
+</h3>
+
+<p>
+Email: {{ user.email }}
+</p>
+
+<p>
+Phone: {{ user.phone or "Not provided" }}
+</p>
+
+<p>
+Child: {{ user.child_name or "Not provided" }}
+</p>
+
+<p>
+Class:
+{{ user.child_class_level or "Not provided" }}
+</p>
+
+<p>
+Role:
+{{ user.role }}
+</p>
+
+<p>
+Joined:
+{{ user.created_at.strftime("%d %B %Y") }}
+</p>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+
+</div>
+
+</body>
+</html>

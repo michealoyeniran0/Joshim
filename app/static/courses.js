@@ -28,12 +28,19 @@ async function loadCourses() {
     });
 }
 
+
 async function enroll(courseId) {
     if (window.isLoggedIn) {
+
         const res = await fetch("/enroll", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ course_id: courseId })
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": getCSRFToken()
+            },
+            body: JSON.stringify({
+                course_id: courseId
+            })
         });
 
         const result = await res.json();
@@ -49,5 +56,6 @@ async function enroll(courseId) {
 
     window.location.href = `/register-page?course_id=${courseId}`;
 }
+
 
 loadCourses();

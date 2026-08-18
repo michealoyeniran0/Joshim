@@ -7,16 +7,18 @@ async function loadProfile() {
     document.getElementById("profilePhone").textContent = data.phone || "Not provided";
 
     if (data.profile_image) {
-    const img = document.getElementById("profileImg");
-    img.src = "/static/" + data.profile_image;
-    img.style.display = "block";
+        const img = document.getElementById("profileImg");
+        img.src = "/static/" + data.profile_image;
+        img.style.display = "block";
     }
 }
+
 
 document.getElementById("uploadForm").addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const fileInput = document.getElementById("photoInput");
+
     if (!fileInput.files.length) {
         document.getElementById("uploadResponse").innerText = "Please choose a photo first.";
         return;
@@ -27,15 +29,22 @@ document.getElementById("uploadForm").addEventListener("submit", async (e) => {
 
     const res = await fetch("/profile/upload", {
         method: "POST",
+        headers: {
+            "X-CSRFToken": getCSRFToken()
+        },
         body: formData
     });
 
     const result = await res.json();
-    document.getElementById("uploadResponse").innerText = result.message || result.error;
+
+    document.getElementById("uploadResponse").innerText =
+        result.message || result.error;
 
     if (result.profile_image) {
-        document.getElementById("profileImg").src = "/static/" + result.profile_image + "?t=" + Date.now();
+        document.getElementById("profileImg").src =
+            "/static/" + result.profile_image + "?t=" + Date.now();
     }
 });
+
 
 loadProfile();

@@ -3,7 +3,7 @@ import string
 from functools import wraps
 from flask import Blueprint, request, jsonify, render_template
 from flask_login import login_required, current_user
-from app.models import db, Course, Enrollment, User, ClassSlot
+from app.models import db, Course, Enrollment, User, ClassSlot, Payment
 from datetime import date, timedelta
 
 admin_bp = Blueprint("admin", __name__)
@@ -188,15 +188,42 @@ def delete_slot(slot_id):
 @admin_bp.route("/admin/enrollment/<int:enrollment_id>/generate-code", methods=["POST"])
 @admin_required
 def generate_code(enrollment_id):
-    enrollment = Enrollment.query.get(enrollment_id)
+
+    enrollment = db.session.get(
+        Enrollment,
+        enrollment_id
+    )
+
     if not enrollment:
         return jsonify({"error": "Enrollment not found"}), 404
 
-    code = "".join(random.choices(string.ascii_uppercase + string.digits, k=6))
+    code = "".join(
+        random.choices(
+            string.ascii_uppercase + string.digits,
+            k=6
+        )
+    )
+
     enrollment.access_code = code
+
     db.session.commit()
 
-    return jsonify({"message": "Code generated", "code": code})
+    return jsonify({
+        "message": "Code generated",
+        "code": code
+    })
+@admin_bp.route("/admin/enrollments")
+@admin_required
+def admin_enrollments():
+
+    enrollments = Enrollment.query.order_by(
+        Enrollment.enrolled_at.desc()
+    ).all()
+
+    return render_template(
+        "admin_enrollments.html",
+        enrollments=enrollments
+    )
 @admin_bp.route("/admin/course-requests", methods=["GET"])
 @admin_required
 def get_course_requests():
@@ -209,3 +236,19 @@ def get_course_requests():
         "child_name": u.child_name,
         "requested_course": u.requested_course
     } for u in users])
+
+@admin_bp.route("/admin/users")
+@login_required
+def users():
+
+    if current_user.role != "admin":
+        return jsonify({"error": "Unauthorized"}), 403
+
+    users = User.query.order_by(
+        User.created_at.desc()
+    ).all()
+
+    return render_template(
+        "admin_users.html",
+        users=users
+    )

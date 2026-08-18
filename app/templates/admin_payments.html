@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Payments | Admin</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="wrap">
+
+<header class="site-nav">
+
+<a href="/admin" class="brand">
+Joshim Admin
+</a>
+
+<nav>
+<a href="/admin">
+Dashboard
+</a>
+
+<a href="/admin/users">
+Users
+</a>
+
+<a href="/logout" class="nav-cta">
+Logout
+</a>
+</nav>
+
+</header>
+
+
+<section style="padding:50px 0 20px;">
+
+<h2>
+Payment History
+</h2>
+
+<p style="color:var(--slate);">
+Total payments: {{ payments|length }}
+</p>
+
+</section>
+
+
+<div class="course-container">
+
+{% for payment in payments %}
+
+<div class="card">
+
+<h3>
+Payment #{{ payment.id }}
+</h3>
+
+
+<p>
+User ID:
+{{ payment.user_id }}
+</p>
+
+
+<p>
+Course ID:
+{{ payment.course_id }}
+</p>
+
+
+<p>
+Amount:
+₦{{ payment.amount }}
+</p>
+
+
+<p>
+Status:
+{{ payment.status }}
+</p>
+
+
+<p>
+Reference:
+{{ payment.reference or "No reference" }}
+</p>
+
+
+<p>
+Date:
+{{ payment.created_at.strftime("%d %B %Y") }}
+</p>
+
+
+</div>
+
+{% endfor %}
+
+</div>
+
+
+</div>
+
+</body>
+
+</html>

@@ -1,11 +1,13 @@
-from dotenv import load_dotenv
-load_dotenv()
 import os
+from datetime import timedelta
+from dotenv import load_dotenv
+
+load_dotenv()
 
 class Config:
 
     # Security
-    SECRET_KEY = os.environ.get("SECRET_KEY") or "this_is_a_dev_secret_key"
+    SECRET_KEY = os.environ.get("SECRET_KEY")
 
     # Database
     SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL") or "sqlite:///joshim.db"
@@ -27,5 +29,9 @@ class Config:
 
     # Session security
     SESSION_COOKIE_SAMESITE = "Lax"
-    SESSION_COOKIE_SECURE = False  # set True once you're serving over https
-    MAX_CONTENT_LENGTH = 5 * 1024 * 1024  # 5 MB upload limit
+    SESSION_COOKIE_HTTPONLY = True
+    SESSION_COOKIE_SECURE = False
+    PERMANENT_SESSION_LIFETIME = timedelta(hours=2)
+
+    MAX_CONTENT_LENGTH = 5 * 1024 * 1024
+    

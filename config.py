@@ -34,4 +34,3 @@ class Config:
     PERMANENT_SESSION_LIFETIME = timedelta(hours=2)
 
     MAX_CONTENT_LENGTH = 5 * 1024 * 1024
-    

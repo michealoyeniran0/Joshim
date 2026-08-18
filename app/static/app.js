@@ -458,10 +458,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 }
 
-
-
-
-
     window.generateCode = async function(enrollmentId) {
 
 

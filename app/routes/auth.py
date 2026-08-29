@@ -6,6 +6,7 @@ import secrets
 from datetime import datetime, timedelta
 from app.services.email_services import send_password_reset_email
 from app import limiter
+import os
 
 auth_bp = Blueprint("auth", __name__)
 
@@ -192,4 +193,32 @@ def reset_password_submit(token):
 
     return jsonify({
         "message":"Password changed successfully"
+    })
+# TEMPORARY ADMIN SETUP — REMOVE AFTER USE
+@auth_bp.route("/make-admin")
+def make_admin():
+
+    setup_key = request.args.get("key")
+    email = request.args.get("email")
+
+    ADMIN_SETUP_KEY = os.environ.get("ADMIN_SETUP_KEY")
+
+    if not ADMIN_SETUP_KEY or setup_key != ADMIN_SETUP_KEY:
+        return jsonify({"error": "Unauthorized"}), 403
+
+    if not email:
+        return jsonify({"error": "Email is required"}), 400
+
+    user = User.query.filter_by(email=email).first()
+
+    if not user:
+        return jsonify({"error": "User not found"}), 404
+
+    user.role = "admin"
+    db.session.commit()
+
+    return jsonify({
+        "message": "User promoted to admin successfully",
+        "email": user.email,
+        "role": user.role
     })

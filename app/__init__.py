@@ -27,6 +27,13 @@ def create_app():
     # Initialize database
     db.init_app(app)
 
+    # Initialize database
+    db.init_app(app)
+
+    # Create database tables if they do not exist
+    with app.app_context():
+        db.create_all()
+
     # Initialize login manager
     login_manager.init_app(app)
     login_manager.login_view = "auth.login_page"

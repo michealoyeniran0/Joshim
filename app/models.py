@@ -69,6 +69,15 @@ class User(db.Model, UserMixin):
         default=datetime.utcnow
     )
 
+    reset_token = db.Column(
+    db.String(100),
+    nullable=True
+    )
+
+    reset_token_expiry = db.Column(
+    db.DateTime,
+    nullable=True
+    )
 
     enrollments = db.relationship(
         "Enrollment",

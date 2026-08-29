@@ -470,7 +470,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 headers: {
 
                     "X-CSRFToken": getCSRFToken()
-
                 }
 
             }

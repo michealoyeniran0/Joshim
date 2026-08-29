@@ -8,6 +8,7 @@ __pycache__/
 .env
 
 instance/*.db
+*.db
 *.sqlite3
 
 app/static/uploads/

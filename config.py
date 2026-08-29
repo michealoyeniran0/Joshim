@@ -11,7 +11,6 @@ class Config:
 
     # Database
     SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL") or "sqlite:///joshim.db"
-
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # Email Configuration
@@ -20,6 +19,7 @@ class Config:
     MAIL_USE_TLS = True
     MAIL_USERNAME = os.environ.get("EMAIL_USER")
     MAIL_PASSWORD = os.environ.get("EMAIL_PASS")
+    MAIL_DEFAULT_SENDER = ("JoshimEdu", os.environ.get("EMAIL_USER"))
 
     # Paystack
     PAYSTACK_SECRET_KEY = os.environ.get("PAYSTACK_SECRET_KEY")
@@ -30,7 +30,8 @@ class Config:
     # Session security
     SESSION_COOKIE_SAMESITE = "Lax"
     SESSION_COOKIE_HTTPONLY = True
-    SESSION_COOKIE_SECURE = False
+    SESSION_COOKIE_SECURE = os.environ.get("RENDER") == "true"
     PERMANENT_SESSION_LIFETIME = timedelta(hours=2)
 
+    # Upload limit
     MAX_CONTENT_LENGTH = 5 * 1024 * 1024

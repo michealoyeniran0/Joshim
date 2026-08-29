@@ -1,53 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>My Courses — Joshim</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<title>My Courses — Joshim</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='student.css') }}">
 </head>
 <body>
+<div class="wrap">
+<header class="site-nav">
+<a href="/" class="brand">Joshim</a>
+<nav>
 
-    <div class="wrap">
-        <header class="site-nav">
-            <a href="/" class="brand" style="text-decoration:none;">Joshim</a>
-            <nav>
-                <span style="color:var(--slate); font-size:0.9rem;">Hi, {{ current_user.name.split(' ')[0] }}</span>
-                <a href="/courses-page">Browse courses</a>
-                <a href="/profile">My profile</a>
-                <a href="/logout" class="nav-cta">Log out</a>
-            </nav>
-        </header>
+<a href="/courses-page">
+Browse courses
+</a>
 
-        <section style="padding:50px 0 10px 0;">
-            <div style="font-family:var(--font-mono); font-size:0.8rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--accent-deep); margin-bottom:12px;">
-                Dashboard
-            </div>
+<div class="profile-menu">
 
-            <h2 style="font-size:clamp(1.8rem, 4vw, 2.4rem);">
-                My courses
-            </h2>
+<button class="profile-toggle">
 
-            <p style="color:var(--slate); max-width:50ch; margin-top:10px;">
-                Pay to unlock a course you've enrolled in, or jump straight
-                into one you've already paid for.
-            </p>
-        </section>
+<img src="/static/uploads/default.png" id="navProfileImg">
 
-        <div id="myCourseList"></div>
+<span>
+{{ current_user.name.split(' ')[0] }}
+</span>
 
-        <footer class="site-footer">
-            <div>© 2026 Joshim. Online tutoring for kids.</div>
-            <div>
-                <a href="/legal">Terms & Privacy</a> · 
-                <a href="/">Home</a>
-            </div>
-        </footer>
-    </div>
+</button>
 
-    <script src="{{ url_for('static', filename='csrf.js') }}"></script>
-    <script src="{{ url_for('static', filename='student.js') }}"></script>
 
+<div class="profile-dropdown">
+
+<a href="/profile">
+My Profile
+</a>
+
+<a href="/profile#password">
+Change Password
+</a>
+
+<a href="/logout">
+Log out
+</a>
+
+</div>
+
+</div>
+
+</nav>
+</header>
+
+<section class="dashboard-header">
+<div class="eyebrow">Dashboard</div>
+<h2>My courses</h2>
+<p>Manage your enrolled classes, view your schedule, and join your live lessons.</p>
+</section>
+
+<section class="student-courses">
+<div id="myCourseList"></div>
+</section>
+
+<footer class="site-footer">
+<div>© 2026 Joshim. Online tutoring for kids.</div>
+<div>
+<a href="/legal">Terms & Privacy</a> · 
+<a href="/">Home</a>
+</div>
+</footer>
+</div>
+
+<script src="{{ url_for('static', filename='csrf.js') }}"></script>
+<script src="{{ url_for('static', filename='student.js') }}"></script>
+<script src="{{ url_for('static', filename='profile-nav.js') }}"></script>
 </body>
 </html>

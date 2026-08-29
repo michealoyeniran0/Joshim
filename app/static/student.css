@@ -1,0 +1,289 @@
+/* =========================
+   STUDENT DASHBOARD
+========================= */
+
+
+.site-nav{
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:20px 0;
+border-bottom:1px solid var(--line);
+}
+
+
+.site-nav .brand{
+font-family:var(--font-display);
+font-size:1.4rem;
+font-weight:600;
+color:var(--ink);
+}
+
+
+.site-nav nav{
+display:flex;
+align-items:center;
+gap:25px;
+}
+
+
+.site-nav nav a{
+color:var(--slate);
+font-size:.92rem;
+}
+
+
+.site-nav nav a:hover{
+color:var(--ink);
+}
+
+
+/* =========================
+   COURSE GRID
+========================= */
+
+
+.course-container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:18px;
+margin-top:30px;
+}
+
+
+/* =========================
+   COURSE CARDS
+========================= */
+
+
+.card{
+background:var(--paper-raised);
+border:1px solid var(--line);
+border-radius:10px;
+padding:20px;
+overflow:hidden;
+}
+
+
+.card h3{
+font-size:1.1rem;
+}
+
+
+.card p{
+color:var(--slate);
+font-size:.95rem;
+}
+
+
+/* =========================
+   BUTTON GROUPS
+========================= */
+
+
+.actions{
+display:flex;
+flex-direction:column;
+gap:10px;
+margin-top:15px;
+}
+
+
+.actions a,
+.actions button{
+width:100%;
+text-align:center;
+box-sizing:border-box;
+}
+
+
+/* =========================
+   PAYMENT BUTTON
+========================= */
+
+
+.btn-accent{
+background:var(--accent);
+color:var(--ink);
+}
+
+
+.btn-accent:hover{
+background:var(--accent-deep);
+color:white;
+}
+
+
+/* =========================
+   DELETE BUTTON
+========================= */
+
+
+.delete{
+background:var(--danger);
+color:white;
+}
+
+
+.delete:hover{
+background:#8a3a30;
+}
+
+
+/* =========================
+   SCHEDULE BOX
+========================= */
+
+
+.schedule-box{
+margin-top:15px;
+padding:15px;
+border-radius:8px;
+background:#F8F6F0;
+}
+
+
+.schedule-item{
+margin-bottom:12px;
+}
+
+
+.schedule-item:last-child{
+margin-bottom:0;
+}
+
+
+.meet-btn{
+display:block;
+width:100%;
+padding:10px 14px;
+text-align:center;
+background:var(--accent);
+color:var(--ink);
+border-radius:8px;
+}
+
+
+.meet-btn:hover{
+background:var(--accent-deep);
+color:white;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+
+@media(max-width:640px){
+
+.site-nav{
+flex-direction:column;
+gap:15px;
+align-items:flex-start;
+}
+
+
+.site-nav nav{
+gap:15px;
+flex-wrap:wrap;
+}
+
+
+.course-container{
+grid-template-columns:1fr;
+}
+
+}
+.dashboard-header{
+padding:50px 0 30px;
+}
+
+
+.dashboard-header h2{
+font-size:clamp(1.8rem,4vw,2.4rem);
+}
+
+
+.dashboard-header p{
+color:var(--slate);
+max-width:50ch;
+margin-top:10px;
+}
+
+
+.welcome-user{
+color:var(--slate);
+font-size:.9rem;
+}
+
+
+.student-courses{
+margin-top:20px;
+}
+.profile-menu{
+position:relative;
+}
+
+
+.profile-toggle{
+display:flex;
+align-items:center;
+gap:8px;
+background:transparent;
+color:var(--ink);
+padding:5px 10px;
+border-radius:20px;
+}
+
+
+.profile-toggle:hover{
+background:var(--paper);
+}
+
+
+.profile-toggle img{
+width:34px;
+height:34px;
+border-radius:50%;
+object-fit:cover;
+}
+
+
+.arrow{
+font-size:.7rem;
+}
+
+
+.profile-dropdown{
+position:absolute;
+right:0;
+top:45px;
+width:180px;
+background:white;
+border:1px solid var(--line);
+border-radius:10px;
+padding:8px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+display:none;
+z-index:20;
+}
+
+
+.profile-dropdown a{
+display:block;
+padding:10px;
+color:var(--slate);
+border-radius:6px;
+}
+
+
+.profile-dropdown a:hover{
+background:var(--paper);
+color:var(--ink);
+}
+
+
+.profile-menu:hover .profile-dropdown{
+display:block;
+}

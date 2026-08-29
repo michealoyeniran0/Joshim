@@ -1,241 +1,504 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Joshim — Online Tutoring for Kids, Anywhere</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Joshim — Live Online Tutoring for Children</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='landing.css') }}">
 </head>
 <body>
 
-    <div class="wrap">
-        <header class="site-nav">
-            <div class="brand">Joshim Educational Services</div>
-            <nav>
-                <a href="/courses-page">Courses</a>
-                {% if current_user.is_authenticated %}
-                    <a href="/student">My courses</a>
-                    <a href="/logout" class="nav-cta">Log out</a>
-                {% else %}
-                    <a href="/login-page">Log in</a>
-                    <a href="/register-page" class="nav-cta">Get started</a>
-                {% endif %}
-            </nav>
-        </header>
-    </div>
+<div class="landing-page">
 
-    <div class="wrap">
+<header class="landing-nav">
+<div class="brand-area">
+<a href="/" class="brand-name">Joshim</a>
+<span>Educational Services</span>
+</div>
 
-        <section class="hero fade-in">
-            <div style="display:flex; gap:48px; align-items:center; flex-wrap:wrap;">
-                <div style="flex:1; min-width:280px;">
-                    <div class="eyebrow">Virtual and physical tutoring · Ages 5–16</div>
-                    <h1>Real lessons, real teachers, wherever your child lives.</h1>
-                    <p class="lede">
-                        Joshim connects kids at home in Nigeria — and abroad — with
-                        live tutors for the subjects that matter. Book a class, pay
-                        per course, and watch your child's confidence grow.
-                    </p>
-                    <div class="cta-row">
-                        <a href="/register-page" class="btn btn-accent">Enroll a child</a>
-                        <a href="/courses-page" class="btn btn-ghost">Browse courses</a>
-                    </div>
-                </div>
+<nav>
+<a href="/courses-page">Courses</a>
+<a href="#how-it-works">How it works</a>
+<a href="#faq">FAQ</a>
 
-                <div style="flex:1; min-width:280px;">
-                    <img src="{{ url_for('static', filename='images/hero.png') }}"
-                        alt="A student learning online with Joshim"
-                        style="width:100%; border-radius:14px; box-shadow:0 8px 30px rgba(28,37,48,0.15); object-fit:cover; max-height:420px;">
-                </div>
-            </div>
+{% if current_user.is_authenticated %}
+<a href="/student">
+My courses
+</a>
 
-            <div class="tz-strip">
-                <div class="tz">
-                    <div class="city">Abuja</div>
-                    <div class="time" id="tz-abuja">--:--</div>
-                    <div class="caption">Home base</div>
-                </div>
-                <div class="tz">
-                    <div class="city">London</div>
-                    <div class="time" id="tz-london">--:--</div>
-                    <div class="caption">Classes fit school hours abroad</div>
-                </div>
-                <div class="tz">
-                    <div class="city">New York</div>
-                    <div class="time" id="tz-newyork">--:--</div>
-                    <div class="caption">Evening sessions available</div>
-                </div>
-            </div>
-        </section>
+<div class="profile-menu">
 
-        <section class="section">
-            <div class="eyebrow">Why Joshim</div>
-            <h2>Built around how kids actually learn online</h2>
-            <p class="section-lede">
-                No generic video library. Every course is a real, scheduled
-                class with a tutor who knows your child by name.
-            </p>
-            <div class="feature-grid">
-                <div class="feature">
-                    <div class="num">01</div>
-                    <h3>Live, not recorded</h3>
-                    <p>Every class is live, with room for questions — not a pre-recorded video your child tunes out of.</p>
-                </div>
-                <div class="feature">
-                    <div class="num">02</div>
-                    <h3>Pay per course</h3>
-                    <p>No subscriptions. Choose a course, pay once, get access — simple enough for parents to track.</p>
-                </div>
-                <div class="feature">
-                    <div class="num">03</div>
-                    <h3>Timezone-friendly</h3>
-                    <p>Whether your child is in Nigeria and any part of the world, classes are scheduled to fit their actual day.</p>
-                </div>
-            </div>
-        </section>
+<button class="profile-toggle">
 
-        <section class="section">
-            <div style="display:flex; gap:48px; align-items:center; flex-wrap:wrap;">
-                <div style="flex:1; min-width:280px;">
-                    <img src="{{ url_for('static', filename='images/how-it-work.jpg') }}"
-                         alt="A student attending an online class"
-                         style="width:100%; border-radius:14px; object-fit:cover; max-height:360px;">
-                </div>
+<img src="/static/uploads/default.png" id="navProfileImg">
 
-                <div style="flex:1; min-width:280px;">
-                    <div class="eyebrow">How it works</div>
-                    <h2>From browsing to your first class, in four steps</h2>
+<span>
+{{ current_user.name.split(' ')[0] }}
+</span>
 
-                    <div style="margin-top:24px; display:flex; flex-direction:column; gap:20px;">
-                        <div style="display:flex; gap:14px;">
-                            <div style="font-family:var(--font-mono); color:var(--accent-deep); font-weight:500;">01</div>
-                            <div>
-                                <strong>Browse courses</strong><br>
-                                <span style="color:var(--slate); font-size:0.92rem;">See what's available for your child's age and subject.</span>
-                            </div>
-                        </div>
-                        <div style="display:flex; gap:14px;">
-                            <div style="font-family:var(--font-mono); color:var(--accent-deep); font-weight:500;">02</div>
-                            <div>
-                                <strong>Enroll</strong><br>
-                                <span style="color:var(--slate); font-size:0.92rem;">Create an account and reserve their spot.</span>
-                            </div>
-                        </div>
-                        <div style="display:flex; gap:14px;">
-                            <div style="font-family:var(--font-mono); color:var(--accent-deep); font-weight:500;">03</div>
-                            <div>
-                                <strong>Pay securely</strong><br>
-                                <span style="color:var(--slate); font-size:0.92rem;">One-time payment per course, no subscriptions.</span>
-                            </div>
-                        </div>
-                        <div style="display:flex; gap:14px;">
-                            <div style="font-family:var(--font-mono); color:var(--accent-deep); font-weight:500;">04</div>
-                            <div>
-                                <strong>Attend live classes</strong><br>
-                                <span style="color:var(--slate); font-size:0.92rem;">Join real, scheduled sessions with a tutor.</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="section">
-            <div class="eyebrow">Meet your tutor</div>
-            <h2>Taught by someone who understands how kids learn</h2>
+</button>
 
-            <div style="display:flex; gap:32px; align-items:center; flex-wrap:wrap; margin-top:32px;">
-                <img src="{{ url_for('static', filename='images/sis.jpg') }}"
-                    alt="Oyeniran Bunmi, Joshim tutor"
-                    style="width:140px; height:140px; border-radius:50%; object-fit:cover; box-shadow:0 8px 24px rgba(28,37,48,0.12);">
+<div class="profile-dropdown">
 
-                <div style="flex:1; min-width:240px;">
-                    <h3 style="margin-bottom:4px;">Oyeniran Bunmi</h3>
-                    <div style="font-family:var(--font-mono); font-size:0.85rem; color:var(--accent-deep); margin-bottom:14px;">
-                        M.Sc in Psychology · Educator
-                    </div>
-                    <p style="color:var(--slate); max-width:52ch;">
-                        Bunmi brings a background in psychology to every class —
-                        understanding not just what to teach, but how each child
-                        learns best. That means lessons that meet kids where they
-                        are, build real confidence, and actually stick.
-                    </p>
-                </div>
-            </div>
-        </section>
-        <section class="section">
-    <div class="eyebrow">FAQ</div>
-    <h2>Common questions</h2>
+<a href="/profile">
+My Profile
+</a>
 
-    <div style="margin-top:24px; display:flex; flex-direction:column; gap:0;">
-        <details style="border-top:1px solid var(--line); padding:18px 0;">
-            <summary style="cursor:pointer; font-weight:500; list-style:none;">How does payment work?</summary>
-            <p style="color:var(--slate); margin-top:10px; font-size:0.92rem;">
-                Classes are billed monthly. For courses with a listed price, payment is handled securely online through Paystack. For other courses, your tutor will confirm the monthly fee directly with you and provide an access code once payment is received. Access renews each month — you'll be notified when it's time to renew.
-            </p>
-        </details>
+<a href="/profile#password">
+Change Password
+</a>
 
-        <details style="border-top:1px solid var(--line); padding:18px 0;">
-            <summary style="cursor:pointer; font-weight:500; list-style:none;">What if my child misses a class?</summary>
-            <p style="color:var(--slate); margin-top:10px; font-size:0.92rem;">
-                Reach out to us and we'll help arrange a catch-up or reschedule
-                where possible.
-            </p>
-        </details>
+<a href="/logout">
+Log out
+</a>
 
-        <details style="border-top:1px solid var(--line); padding:18px 0;">
-            <summary style="cursor:pointer; font-weight:500; list-style:none;">Is my child's class safe and supervised?</summary>
-            <p style="color:var(--slate); margin-top:10px; font-size:0.92rem;">
-                Yes — every class is led live by a real tutor, not an open chatroom.
-                No child attends unsupervised.
-            </p>
-        </details>
+</div>
 
-        <details style="border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:18px 0;">
-            <summary style="cursor:pointer; font-weight:500; list-style:none;">Can students join from outside Nigeria?</summary>
-            <p style="color:var(--slate); margin-top:10px; font-size:0.92rem;">
-                Yes — classes are scheduled with time zones in mind, so students
-                abroad can join comfortably.
-            </p>
-        </details>
-    </div>
+</div>
+
+{% else %}
+<a href="/login-page">Login</a>
+<a href="/register-page" class="nav-button">Get started</a>
+{% endif %}
+
+</nav>
+</header>
+
+
+<section class="modern-hero">
+
+<div class="hero-overlay"></div>
+
+<div class="hero-content">
+
+<div class="hero-text">
+
+<div class="hero-badge">
+🎓 Virtual & Physical Tutoring · Ages 5 and Above
+</div>
+
+<h1>
+Real lessons.<br>
+Real teachers.<br>
+<span>Real results.</span>
+</h1>
+
+<p>
+Joshim connects children in Nigeria and across the world with expert tutors through live, interactive classes designed to improve confidence and academic performance.
+</p>
+
+
+<div class="hero-buttons">
+
+<a href="/register-page" class="btn hero-primary">
+Enroll a child
+</a>
+
+<a href="/courses-page" class="btn hero-secondary">
+Browse courses
+</a>
+
+</div>
+
+
+<div class="hero-features">
+
+<div>
+<div class="feature-icon">✓</div>
+<div>
+<strong>Live Classes</strong>
+<small>Interactive learning</small>
+</div>
+</div>
+
+
+<div>
+<div class="feature-icon">✓</div>
+<div>
+<strong>Expert Tutors</strong>
+<small>Qualified teachers</small>
+</div>
+</div>
+
+
+<div>
+<div class="feature-icon">✓</div>
+<div>
+<strong>Flexible Schedule</strong>
+<small>Fits your child's time</small>
+</div>
+</div>
+
+
+</div>
+
+</div>
+
+</div>
+
 </section>
-        <section class="section">
-            <div class="eyebrow">Subjects</div>
-            <h2>A growing list of courses</h2>
-            <div class="subject-row">
-                <span class="subject-pill">Mathematics</span>
-                <span class="subject-pill">English</span>
-                <span class="subject-pill">Coding for kids</span>
-                <span class="subject-pill">Science</span>
-                <span class="subject-pill">Reading & Comprehension</span>
-            </div>
-        </section>
 
-        <div class="cta-band">
-            <h2>Ready to book your child's first class?</h2>
-            <p>Registration takes less than two minutes.</p>
-            <a href="/register-page" class="btn btn-accent">Create an account</a>
-        </div>
 
-        <footer class="site-footer">
-            <div>© 2026 Joshim. Online tutoring for kids.</div>
-            <div><a href="/legal">Terms & Privacy</a> · <a href="/login-page">Log in</a></div>
-        </footer>
-    </div>
+<section class="tz-strip">
 
-    <script>
-        function updateClocks() {
-            const opts = { hour: '2-digit', minute: '2-digit', hour12: false };
-            document.getElementById('tz-abuja').textContent =
-                new Date().toLocaleTimeString('en-GB', { ...opts, timeZone: 'Africa/Lagos' });
-            document.getElementById('tz-london').textContent =
-                new Date().toLocaleTimeString('en-GB', { ...opts, timeZone: 'Europe/London' });
-            document.getElementById('tz-newyork').textContent =
-                new Date().toLocaleTimeString('en-GB', { ...opts, timeZone: 'America/New_York' });
-        }
-        updateClocks();
-        setInterval(updateClocks, 30000);
-    </script>
+<div class="tz">
+<div class="city">Nigeria</div>
+<div class="time" id="nigeria-time"></div>
+<div class="caption">Live classes available</div>
+</div>
+
+
+<div class="tz">
+<div class="city">United Kingdom</div>
+<div class="time" id="uk-time"></div>
+<div class="caption">International students</div>
+</div>
+
+
+<div class="tz">
+<div class="city">United States</div>
+<div class="time" id="usa-time"></div>
+<div class="caption">Flexible learning</div>
+</div>
+
+</section>
+<section class="why-section">
+
+<div class="section-header">
+<div class="eyebrow">Why Joshim</div>
+<h2>Built around how children actually learn</h2>
+<p>
+Not just videos. Not just assignments. Real teachers helping children learn, ask questions, and grow with confidence.
+</p>
+</div>
+
+
+<div class="feature-grid-modern">
+
+<div class="modern-card">
+<div class="card-icon"></div>
+<h3>Live, Not Recorded</h3>
+<p>
+Every lesson happens live with a tutor who guides, explains, and answers questions.
+</p>
+</div>
+
+
+<div class="modern-card">
+<div class="card-icon"></div>
+<h3>Trusted Tutors</h3>
+<p>
+Children learn from educators who understand their academic needs.
+</p>
+</div>
+
+
+<div class="modern-card">
+<div class="card-icon"></div>
+<h3>Flexible Learning</h3>
+<p>
+Classes are arranged around your child's schedule and learning goals.
+</p>
+</div>
+
+</div>
+
+</section>
+
+
+
+<section id="how-it-works" class="how-section">
+
+<div class="section-header">
+
+<div class="eyebrow">
+How it works
+</div>
+
+<h2>
+Simple learning journey for every child
+</h2>
+
+<p>
+Getting started with Joshim takes only a few simple steps.
+</p>
+
+</div>
+
+
+<div class="how-image">
+<img src="/static/images/how-it-work.jpg" alt="How Joshim works">
+</div>
+
+
+<div class="steps-grid">
+
+<div class="step-card">
+<div class="step-number">01</div>
+<h3>Choose a Course</h3>
+<p>
+Select the subjects your child needs and explore available learning options.
+</p>
+</div>
+
+
+<div class="step-card">
+<div class="step-number">02</div>
+<h3>Create an Account</h3>
+<p>
+Register your child and access your personalised learning dashboard.
+</p>
+</div>
+
+
+<div class="step-card">
+<div class="step-number">03</div>
+<h3>Join Live Classes</h3>
+<p>
+Meet your tutor online and participate in interactive lessons.
+</p>
+</div>
+
+
+<div class="step-card">
+<div class="step-number">04</div>
+<h3>Track Progress</h3>
+<p>
+Follow your child's learning journey and improvement over time.
+</p>
+</div>
+
+</div>
+
+</section>
+
+
+
+<section class="tutor-section">
+
+<div class="tutor-container">
+
+
+<div class="tutor-image">
+
+<img src="/static/images/sis.jpg" alt="Joshim Tutor">
+
+</div>
+
+
+<div class="tutor-content">
+
+<div class="eyebrow">
+Our Tutors
+</div>
+
+
+<h2>
+Learning from qualified educators
+</h2>
+
+
+<p>
+Our tutors combine academic expertise, teaching experience, and a passion for helping children achieve their learning goals.
+</p>
+
+
+<div class="tutor-points">
+
+<div>
+✓ Experienced educators
+</div>
+
+<div>
+✓ MSc and professionally trained teachers
+</div>
+
+<div>
+✓ Subject specialists
+</div>
+
+<div>
+✓ Student-focused teaching approach
+</div>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+</section>
+<section id="faq" class="faq-section">
+
+<div class="section-header">
+
+<div class="eyebrow">
+FAQ
+</div>
+
+<h2>
+Frequently asked questions
+</h2>
+
+</div>
+
+
+<div class="faq-list">
+
+
+<div class="faq-item">
+
+<button class="faq-question">
+Are classes live or recorded?
+<span>+</span>
+</button>
+
+<p class="faq-answer">
+Joshim focuses on live tutor-led classes where students can interact, ask questions, and receive guidance from teachers.
+</p>
+
+</div>
+
+
+
+<div class="faq-item">
+
+<button class="faq-question">
+What age groups do you teach?
+<span>+</span>
+</button>
+
+<p class="faq-answer">
+We provide learning support for children and teenagers across different academic levels.
+</p>
+
+</div>
+
+
+
+<div class="faq-item">
+
+<button class="faq-question">
+How do students join classes?
+<span>+</span>
+</button>
+
+<p class="faq-answer">
+After enrollment, students receive access to their class schedule and Google Meet details for live lessons.
+</p>
+
+</div>
+
+
+
+<div class="faq-item">
+
+<button class="faq-question">
+Can parents monitor learning progress?
+<span>+</span>
+</button>
+
+<p class="faq-answer">
+Parents can stay informed about their child's learning journey, attendance, and course participation.
+</p>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<section class="final-cta">
+
+<div class="cta-content">
+
+<h2>
+Give your child the confidence to succeed
+</h2>
+
+<p>
+Join Joshim and connect your child with quality tutoring from experienced educators.
+</p>
+
+
+<a href="/register-page" class="btn hero-primary">
+Start Learning Today
+</a>
+
+
+</div>
+
+</section>
+
+
+
+<footer class="site-footer">
+
+<div>
+© 2026 Joshim Educational Services. All rights reserved.
+</div>
+
+
+<div>
+
+<a href="/legal">
+Terms & Privacy
+</a>
+
+·
+
+<a href="/">
+Home
+</a>
+
+</div>
+
+
+</footer>
+
+
+</div>
+
+
+
+<script>
+
+window.isLoggedIn={{ current_user.is_authenticated | tojson }};
+
+
+document.querySelectorAll(".faq-question").forEach(button=>{
+
+button.addEventListener("click",()=>{
+
+const item=button.parentElement;
+
+item.classList.toggle("active");
+
+
+const icon=button.querySelector("span");
+
+if(item.classList.contains("active")){
+icon.textContent="−";
+}else{
+icon.textContent="+";
+}
+
+});
+
+});
+
+
+</script>
+
+
+<script src="{{ url_for('static', filename='clock.js') }}"></script>
+<script src="{{ url_for('static', filename='profile-nav.js') }}"></script>
 
 </body>
 </html>

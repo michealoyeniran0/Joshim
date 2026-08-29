@@ -1,84 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>My Profile — Joshim</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<title>My Profile — Joshim</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='profile.css') }}">
 </head>
 <body>
 
-    <div class="wrap">
-        <header class="site-nav">
-            <a href="/" class="brand" style="text-decoration:none;">Joshim</a>
-            <nav>
-                <a href="/student">My courses</a>
-                <a href="/logout" class="nav-cta">Log out</a>
-            </nav>
-        </header>
+<div class="wrap">
 
-        <section style="padding:50px 0 10px 0;">
-            <div style="font-family:var(--font-mono); font-size:0.8rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--accent-deep); margin-bottom:12px;">
-                Profile
-            </div>
+<header class="site-nav">
 
-            <h2 style="font-size:clamp(1.8rem, 4vw, 2.4rem);">
-                My profile
-            </h2>
-        </section>
+<a href="/" class="brand">
+Joshim
+</a>
 
-        <div class="card" style="max-width:440px; margin-bottom:60px;">
+<nav>
 
-            <div style="display:flex; align-items:center; gap:18px; margin-bottom:20px;">
-
-                <img id="profileImg"
-                     src="/static/uploads/default.png"
-                     onerror="this.style.display='none'"
-                     style="width:80px; height:80px; border-radius:50%; object-fit:cover; background:var(--line);">
-
-                <div>
-                    <div id="profileName" style="font-family:var(--font-display); font-size:1.2rem;"></div>
-                    <div id="profileEmail" style="color:var(--slate); font-size:0.9rem;"></div>
-                    <div id="profilePhone" style="color:var(--slate); font-size:0.9rem;"></div>
-                </div>
-
-            </div>
+<a href="/student">
+My courses
+</a>
 
 
-            <form id="uploadForm">
+<div class="profile-menu">
 
-                <label style="font-size:0.9rem; color:var(--slate);">
-                    Update profile photo
-                </label>
+<button class="profile-toggle">
 
-                <input type="file" id="photoInput" accept="image/*">
+<img src="/static/uploads/default.png" id="navProfileImg">
 
-                <button type="submit"
-                class="btn btn-accent"
-                style="width:100%; margin-top:10px;">
-                    Upload photo
-                </button>
+<span>
+{{ current_user.name.split(' ')[0] }}
+</span>
 
-                <p id="uploadResponse"
-                style="text-align:center; margin-top:10px; font-size:0.9rem; color:var(--slate);">
-                </p>
-
-            </form>
-
-        </div>
+</button>
 
 
-        <footer class="site-footer">
-            <div>© 2026 Joshim. Online tutoring for kids.</div>
-            <div><a href="/">Home</a></div>
-        </footer>
+<div class="profile-dropdown">
 
-    </div>
+<a href="/profile">
+My Profile
+</a>
+
+<a href="#password">
+Change Password
+</a>
+
+<a href="/logout">
+Log out
+</a>
+
+</div>
+
+</div>
 
 
-    <script src="{{ url_for('static', filename='csrf.js') }}"></script>
-    <script src="{{ url_for('static', filename='profile.js') }}"></script>
+</nav>
 
+</header>
+<section class="profile-header">
+<div class="eyebrow">Profile</div>
+<h2>My profile</h2>
+<p>Manage your account details, child's information, and profile photo.</p>
+</section>
+
+
+<div class="profile-card">
+
+<div class="profile-top">
+
+<img id="profileImg"
+src="/static/uploads/default.png"
+alt="Profile picture">
+
+
+<div>
+<h3 id="profileName"></h3>
+<p id="profileEmail"></p>
+</div>
+
+</div>
+
+
+<div class="profile-fields">
+
+<label>
+Phone
+</label>
+
+<input type="text" id="profilePhone" placeholder="Phone number">
+
+
+<label>
+Child name
+</label>
+
+<input type="text" id="childName" placeholder="Child name">
+
+
+<label>
+Child class level
+</label>
+
+<input type="text" id="childClass" placeholder="Class level">
+
+
+<button id="saveProfile" class="btn btn-accent">
+Save changes
+</button>
+
+
+<p id="profileResponse"></p>
+
+</div>
+
+
+
+<div class="profile-divider"></div>
+
+
+<form id="uploadForm">
+
+<h3>Update profile photo</h3>
+
+<input type="file" id="photoInput" accept="image/*">
+
+
+<button type="submit" class="btn btn-accent">
+Upload photo
+</button>
+
+
+<p id="uploadResponse"></p>
+
+
+</form>
+
+
+</div>
+
+
+
+<footer class="site-footer">
+<div>
+© 2026 Joshim. Online tutoring for kids.
+</div>
+
+<div>
+<a href="/">Home</a>
+</div>
+</footer>
+
+
+</div>
+
+
+<script src="{{ url_for('static', filename='csrf.js') }}"></script>
+<script src="{{ url_for('static', filename='profile.js') }}"></script>
+<script src="{{ url_for('static', filename='profile-nav.js') }}"></script>
 </body>
 </html>

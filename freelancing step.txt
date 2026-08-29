@@ -1,0 +1,17 @@
+Steps remaining today:
+
+A. Finish Render setup
+• Complete onboarding
+• Connect GitHub
+• Select Joshim repository
+• Configure Flask deployment
+
+B. Prepare production settings
+We need to check:
+
+• Gunicorn
+• Environment variables
+• Database setup
+• Secret key configuration
+
+C. Deploy the first live version

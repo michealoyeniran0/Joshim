@@ -1,0 +1,317 @@
+/* =========================
+   ADMIN DASHBOARD
+========================= */
+
+
+.admin-container{
+width:100%;
+}
+
+
+/* Page header */
+
+.admin-header{
+padding:40px 0 20px;
+}
+
+
+.admin-header h2{
+font-size:2rem;
+}
+
+
+/* =========================
+   ADMIN CARDS
+========================= */
+
+
+.admin-card{
+background:var(--paper-raised);
+border:1px solid var(--line);
+border-radius:10px;
+padding:22px;
+margin-bottom:25px;
+}
+
+
+.admin-card h3{
+font-size:1.15rem;
+margin-bottom:15px;
+}
+
+
+/* =========================
+   TABLES
+========================= */
+
+
+.table-container{
+overflow-x:auto;
+}
+
+
+.admin-table{
+width:100%;
+border-collapse:collapse;
+background:var(--paper-raised);
+border:1px solid var(--line);
+border-radius:10px;
+overflow:hidden;
+}
+
+
+.admin-table th{
+text-align:left;
+padding:14px;
+font-family:var(--font-mono);
+font-size:.78rem;
+text-transform:uppercase;
+letter-spacing:.05em;
+color:var(--slate);
+background:#F8F6F0;
+border-bottom:1px solid var(--line);
+}
+
+
+.admin-table td{
+padding:14px;
+border-bottom:1px solid var(--line);
+color:var(--slate);
+font-size:.92rem;
+}
+
+
+.admin-table tr:last-child td{
+border-bottom:none;
+}
+
+
+/* =========================
+   ADMIN BUTTONS
+========================= */
+
+
+.admin-actions{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+}
+
+
+.edit{
+background:var(--slate);
+color:white;
+}
+
+
+.edit:hover{
+background:var(--ink-soft);
+}
+
+
+.delete{
+background:var(--danger);
+color:white;
+}
+
+
+.delete:hover{
+background:#8a3a30;
+}
+
+
+/* =========================
+   ADMIN FORMS
+========================= */
+
+
+.admin-form{
+background:var(--paper-raised);
+border:1px solid var(--line);
+border-radius:10px;
+padding:25px;
+}
+
+
+.admin-form label{
+display:block;
+margin-bottom:5px;
+color:var(--slate);
+}
+
+
+.admin-form input,
+.admin-form textarea,
+.admin-form select{
+width:100%;
+padding:11px 12px;
+border:1px solid var(--line);
+border-radius:8px;
+margin-bottom:15px;
+font-family:var(--font-body);
+}
+
+
+.admin-form textarea{
+min-height:120px;
+resize:vertical;
+}
+
+
+/* =========================
+   DASHBOARD STATS
+========================= */
+
+
+.admin-stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:18px;
+margin-bottom:30px;
+}
+
+
+.stat-card{
+background:var(--paper-raised);
+border:1px solid var(--line);
+border-radius:10px;
+padding:20px;
+}
+
+
+.stat-card h4{
+font-family:var(--font-mono);
+font-size:.75rem;
+text-transform:uppercase;
+color:var(--slate);
+}
+
+
+.stat-card strong{
+font-family:var(--font-display);
+font-size:2rem;
+color:var(--ink);
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+
+@media(max-width:640px){
+
+.admin-table{
+font-size:.85rem;
+}
+
+.admin-actions{
+flex-direction:column;
+}
+
+}
+.admin-container{
+max-width:1080px;
+margin:auto;
+padding:40px 24px;
+}
+.admin-form,
+.admin-card{
+max-width:500px;
+}
+.admin-container{
+max-width:1080px;
+margin:0 auto;
+padding:40px 24px;
+}
+
+
+.admin-header{
+padding:30px 0;
+}
+
+
+.admin-header h2{
+font-size:2.2rem;
+}
+
+
+.admin-card{
+background:var(--paper-raised);
+border:1px solid var(--line);
+border-radius:10px;
+padding:25px;
+max-width:520px;
+}
+
+
+.admin-form{
+max-width:520px;
+}
+
+
+.admin-form input{
+height:44px;
+}
+
+
+.admin-form button{
+height:44px;
+}
+
+
+.admin-nav a{
+background:transparent;
+color:var(--slate);
+padding:8px 12px;
+border-radius:6px;
+}
+
+
+.admin-nav a:hover{
+background:var(--paper);
+}
+
+
+.admin-nav .logout{
+background:var(--accent);
+color:var(--ink);
+}
+.admin-section{
+margin-top:60px;
+}
+
+
+.section-lede{
+color:var(--slate);
+max-width:55ch;
+}
+
+
+.admin-card{
+background:var(--paper-raised);
+border:1px solid var(--line);
+border-radius:10px;
+padding:25px;
+max-width:520px;
+}
+
+
+.admin-form{
+background:none;
+border:none;
+padding:0;
+margin:0;
+width:100%;
+}
+
+
+.admin-form input{
+width:100%;
+margin-bottom:14px;
+}
+
+
+.admin-form button{
+width:100%;
+}

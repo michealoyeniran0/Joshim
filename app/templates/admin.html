@@ -1,266 +1,291 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <meta charset="UTF-8">
+<title>Admin — Joshim</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>Admin — Joshim</title>
-
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='admin.css') }}">
 
 </head>
 
-
 <body>
 
+<div class="wrap">
 
-    <div class="wrap">
+<header class="site-nav">
 
+<a href="/" class="brand">
+Joshim
+</a>
 
-        <header class="site-nav">
+<nav>
 
-            <a href="/" class="brand" style="text-decoration:none;">
-                Joshim
-            </a>
+<a href="/admin">
+Dashboard
+</a>
 
+<a href="/courses-page">
+View site
+</a>
 
-            <nav>
 
-                <a href="/courses-page">
-                    View site
-                </a>
+<div class="profile-menu">
 
-                <a href="/admin/users" class="nav-cta">
-                    Users
-                </a>
-                <a href="/admin/payments" class="nav-cta">
-                    Payments
-                </a>
-                <a href="/admin/enrollments" class="nav-cta">
+<button class="profile-toggle">
 
-                    Enrollments
-                </a>
+<img src="/static/uploads/default.png" id="navProfileImg">
 
-                <a href="/logout" class="nav-cta">
-                    Log out
-                </a>
+<span>
+{{ current_user.name.split(' ')[0] }}
+</span>
 
-            </nav>
+<span class="arrow">
+▼
+</span>
 
+</button>
 
-        </header>
 
+<div class="profile-dropdown">
 
+<a href="/profile">
+My Profile
+</a>
 
+<a href="/profile#password">
+Change Password
+</a>
 
+<a href="/logout">
+Log out
+</a>
 
-        <section style="padding:50px 0 10px 0;">
+</div>
 
+</div>
 
-            <div style="
-            font-family:var(--font-mono);
-            font-size:0.8rem;
-            letter-spacing:0.08em;
-            text-transform:uppercase;
-            color:var(--accent-deep);
-            margin-bottom:12px;">
+</nav>
 
-                Admin
+</header>
 
-            </div>
 
+<section class="admin-header">
 
+<div class="eyebrow">
+Admin
+</div>
 
-            <h2 style="font-size:clamp(1.8rem,4vw,2.4rem);">
+<h2>
+Manage courses
+</h2>
 
-                Manage courses
+<p class="section-lede">
+Create, update and manage Joshim learning courses.
+</p>
 
-            </h2>
+</section>
 
 
-        </section>
 
+<section class="admin-card">
 
+<h3 id="formTitle">
+Add a course
+</h3>
 
 
+<form id="courseForm" class="admin-form">
 
 
-        <form id="courseForm"
-        style="width:100%; max-width:480px; margin:0 0 40px 0;">
+<input 
+type="text"
+id="title"
+placeholder="Course title"
+required>
 
 
+<input 
+type="text"
+id="description"
+placeholder="Description"
+required>
 
-            <h3 id="formTitle" style="margin-bottom:16px;">
 
-                Add a course
+<input
+type="number"
+id="price"
+placeholder="Price (₦)"
+required>
 
-            </h3>
 
+<input
+type="text"
+id="video_url"
+placeholder="Video URL"
+required>
 
 
 
-            <input 
-            type="text"
-            id="title"
-            placeholder="Course title"
-            required>
+<button 
+type="submit"
+class="btn btn-accent">
 
+Save course
 
+</button>
 
-            <input 
-            type="text"
-            id="description"
-            placeholder="Description"
-            required>
 
+<p id="response"></p>
 
 
+</form>
 
-            <input
-            type="number"
-            id="price"
-            placeholder="Price (₦)"
-            required>
+</section>
 
 
 
 
-            <input
-            type="text"
-            id="video_url"
-            placeholder="Video URL"
-            required>
+<section class="admin-section">
 
+<div class="eyebrow">
+Courses
+</div>
 
+<h3>
+Available courses
+</h3>
 
 
-            <button 
-            type="submit"
-            class="btn btn-accent"
-            style="width:100%;">
+<div id="courseList"></div>
 
-                Save course
 
-            </button>
+</section>
 
 
 
 
-            <p id="response"
-            style="
-            text-align:center;
-            margin-top:12px;
-            font-size:0.9rem;
-            color:var(--slate);">
+<section class="admin-section">
 
-            </p>
 
+<div class="eyebrow">
+Payments
+</div>
 
 
-        </form>
+<h3>
+Manual payment management
+</h3>
 
 
+<div class="table-container">
 
 
+<table class="admin-table">
 
+<thead>
 
+<tr>
 
-        <div id="courseList"></div>
+<th>
+Student
+</th>
 
+<th>
+Email
+</th>
 
+<th>
+Course
+</th>
 
+<th>
+Status
+</th>
 
+<th>
+Action
+</th>
 
+</tr>
 
+</thead>
 
-        <section style="margin-top:60px;">
-            <div class="eyebrow">
-                Payments
-            </div>
 
-            <h3 style="margin-bottom:20px;">
-                Manual payment management
-            </h3>
+<tbody id="paymentsList">
 
-            <div class="table-container">
-                <table class="admin-table">
-                    <thead>
-                        <tr>
-                            <th>Student</th>
-                            <th>Email</th>
-                            <th>Course</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
+</tbody>
 
-                    <tbody id="paymentsList">
-                    </tbody>
-                </table>
-            </div>
-        </section>
 
-        <section style="margin-top:60px;">
+</table>
 
 
-            <h3 style="margin-bottom:16px;">
+</div>
 
-                Course requests ("Other" from registration)
 
-            </h3>
+</section>
 
 
-            <div id="requestsList"></div>
 
 
-        </section>
 
+<section class="admin-section">
 
 
+<div class="eyebrow">
+Requests
+</div>
 
 
+<h3>
+Course requests
+</h3>
 
 
+<p class="section-lede">
+Requests submitted when parents select "Other" during registration.
+</p>
 
-        <footer class="site-footer">
 
+<div id="requestsList"></div>
 
-            <div>
-                © 2026 Joshim. Online tutoring for kids.
-            </div>
 
+</section>
 
-            <div>
 
-                <a href="/">
-                    Home
-                </a>
 
-            </div>
 
 
-        </footer>
+<footer class="site-footer">
 
+<div>
+© 2026 Joshim. Online tutoring for kids.
+</div>
 
 
+<div>
 
+<a href="/">
+Home
+</a>
 
-    </div>
+</div>
 
 
+</footer>
 
 
+</div>
 
-    <script src="{{ url_for('static', filename='csrf.js') }}"></script>
 
-    <script src="{{ url_for('static', filename='app.js') }}"></script>
 
+<script src="{{ url_for('static', filename='csrf.js') }}"></script>
+
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+<script src="{{ url_for('static', filename='profile-nav.js') }}"></script>
 
 </body>
-
 </html>

@@ -1,6 +1,6 @@
 from flask_wtf.csrf import CSRFProtect
 from flask_mail import Mail
-from flask import Flask
+from flask import Flask,render_template
 from flask_login import LoginManager
 from config import Config
 from app.models import db,User
@@ -42,10 +42,19 @@ def create_app():
     from app.routes.admin import admin_bp
     from app.routes.payment import payment_bp
 
-    # Register blueprints
+      # Register blueprints
     app.register_blueprint(auth_bp)
     app.register_blueprint(student_bp)
     app.register_blueprint(admin_bp)
     app.register_blueprint(payment_bp)
+
+    @app.errorhandler(404)
+    def page_not_found(error):
+        return render_template("404.html"),404
+
+    @app.errorhandler(500)
+    def internal_error(error):
+        db.session.rollback()
+        return render_template("500.html"),500
 
     return app

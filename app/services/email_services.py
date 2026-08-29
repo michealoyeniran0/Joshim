@@ -43,3 +43,26 @@ def send_renewal_reminder(user_email, user_name, course_title, paid_until):
     except Exception as e:
         print(f"Reminder email failed: {e}")
         return False
+def send_password_reset_email(user_email, user_name, reset_link):
+    try:
+        msg = Message(
+            subject="Reset your Joshim password",
+            recipients=[user_email],
+            body=(
+                f"Hi {user_name},\n\n"
+                f"We received a request to reset your Joshim password.\n\n"
+                f"Click the link below to create a new password:\n\n"
+                f"{reset_link}\n\n"
+                f"This link expires in 1 hour.\n\n"
+                f"If you did not request this, ignore this email.\n\n"
+                f"Talk soon,\n"
+                f"The Joshim Team"
+            )
+        )
+
+        mail.send(msg)
+        return True
+
+    except Exception as e:
+        print(f"Password reset email failed: {e}")
+        return False

@@ -1,8 +1,10 @@
-from flask import Blueprint, request, jsonify, redirect
+from flask import Blueprint, request, jsonify, redirect, render_template, url_for
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, current_user, login_required
 from app.models import db, User
-from flask import render_template
+import secrets
+from datetime import datetime, timedelta
+from app.services.email_services import send_password_reset_email
 from app import limiter
 
 auth_bp = Blueprint("auth", __name__)
@@ -97,3 +99,97 @@ def logout():
 @auth_bp.route("/legal")
 def legal_page():
     return render_template("legal.html")
+
+#-----------------
+#forget password
+#------------------
+@auth_bp.route("/forgot-password")
+def forgot_password_page():
+    return render_template("forgot_password.html")
+
+@auth_bp.route("/forgot-password", methods=["POST"])
+def forgot_password():
+
+    data = request.get_json()
+
+    email = data.get("email")
+
+    user = User.query.filter_by(email=email).first()
+
+    if not user:
+        return jsonify({
+            "message": "If the email exists, a reset link has been sent."
+        })
+
+    token = secrets.token_urlsafe(32)
+
+    user.reset_token = token
+    user.reset_token_expiry = datetime.utcnow() + timedelta(hours=1)
+
+    db.session.commit()
+
+    reset_link = url_for(
+        "auth.reset_password",
+        token=token,
+        _external=True
+    )
+
+    send_password_reset_email(
+        user.email,
+        user.name,
+        reset_link
+    )
+
+    return jsonify({
+        "message": "Password reset link sent."
+    })
+
+@auth_bp.route("/reset-password/<token>")
+def reset_password(token):
+
+    user = User.query.filter_by(
+        reset_token=token
+    ).first()
+
+    if not user:
+        return "Invalid reset link", 400
+
+    if user.reset_token_expiry < datetime.utcnow():
+        return "Reset link expired", 400
+
+    return render_template(
+        "reset_password.html",
+        token=token
+    )
+
+@auth_bp.route("/reset-password/<token>", methods=["POST"])
+def reset_password_submit(token):
+
+    data = request.get_json()
+
+    password = data.get("password")
+
+    user = User.query.filter_by(
+        reset_token=token
+    ).first()
+
+    if not user:
+        return jsonify({
+            "error":"Invalid reset link"
+        }),400
+
+    if user.reset_token_expiry < datetime.utcnow():
+        return jsonify({
+            "error":"Reset link expired"
+        }),400
+
+    user.password_hash = generate_password_hash(password)
+
+    user.reset_token = None
+    user.reset_token_expiry = None
+
+    db.session.commit()
+
+    return jsonify({
+        "message":"Password changed successfully"
+    })

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course — Joshim</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='course.css') }}">
+</head>
+
+<body>
+
+<div class="wrap">
+
+<header class="site-nav">
+    <a href="/" class="brand" style="text-decoration:none;">Joshim</a>
+
+    <nav>
+        <a href="/student">My Courses</a>
+        <a href="/logout" class="nav-cta">Log out</a>
+    </nav>
+</header>
+
+
+<section style="padding:50px 0 20px 0;">
+
+    <div class="eyebrow">
+        Course
+    </div>
+
+    <h2 id="courseTitle">
+        Loading...
+    </h2>
+
+    <p id="courseDescription" style="color:var(--slate); max-width:50ch;"></p>
+
+</section>
+
+
+<section>
+
+<h3 style="margin-bottom:20px;">
+    Class Schedule
+</h3>
+
+<div id="scheduleList"></div>
+
+</section>
+
+
+<footer class="site-footer">
+
+<div>
+© 2026 Joshim. Online tutoring for kids.
+</div>
+
+<div>
+<a href="/student">Dashboard</a>
+</div>
+
+</footer>
+
+
+</div>
+
+
+<script>
+    const courseId = {{ course_id }};
+</script>
+
+<script src="{{ url_for('static', filename='course.js') }}"></script>
+
+</body>
+</html>

@@ -6,6 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Register your child — Joshim</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='auth.css') }}">
 </head>
 <body>
 
@@ -21,7 +22,7 @@
             </div>
         </div>
 
-        <div style="flex:1; min-width:300px; display:flex; align-items:center; justify-content:center; padding:40px;">
+        <div style="flex:1; min-width:300px; display:flex; align-items:center; justify-content:center; padding:20px 40px;">
             <form id="registerForm" style="width:100%; max-width:420px; margin:0; box-shadow:none; border:none; background:transparent; padding:0;">
                 <h2 style="margin-bottom: 6px;">Register your child</h2>
                 <p style="color:var(--slate); font-size:0.9rem; margin-bottom:20px;">

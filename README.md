@@ -1,8 +1,8 @@
-# Joshim — Online Tutoring Platform
+# Joshim - Online Tutoring Platform
 
-Joshim is a live tutoring platform designed to connect children and teenagers with qualified tutors through interactive online learning.
+Joshim is a live online tutoring platform designed to connect children and teenagers with qualified tutors through interactive learning.
 
-The platform supports course discovery, parent/child registration, student accounts, tutor-led learning, enrolment, payments, profile management, and administrative course management.
+The platform supports course discovery, parent/child registration, student accounts, course enrolment, payments, profile management, learning schedules, live class access, email communication, and administrative course management.
 
 ## Live Demo
 
@@ -10,9 +10,9 @@ The platform supports course discovery, parent/child registration, student accou
 
 ## Project Overview
 
-Joshim was developed to provide a simple and accessible way for parents to find learning opportunities for their children and manage their children's participation in online tutoring.
+Joshim was developed to provide a simple and accessible way for parents to find learning opportunities for their children and manage their participation in online tutoring.
 
-The platform was built as a full-stack web application, covering both the user-facing learning experience and the administrative side of the tutoring business.
+The application was built as a full-stack web application, covering both the student-facing learning experience and the administrative side of the tutoring service.
 
 ## Key Features
 
@@ -29,7 +29,7 @@ The platform was built as a full-stack web application, covering both the user-f
 - Course enrolment
 - Learning schedule information
 - Live class access
-- Responsive mobile interface
+- Responsive user interface
 
 ### Course Management
 
@@ -44,16 +44,19 @@ Administrators can:
 - Manage course enrolments
 - View student information
 - Manage payment information
+- Manage class schedules
 
 ### Payment Integration
 
-Joshim includes Paystack integration for handling course payments.
+Joshim integrates Paystack for course payment processing.
 
-Payment-related records are stored in the application's database and linked to users and courses.
+Payment records are stored in the application's database and associated with users and courses.
 
-### Communication
+### Email Communication
 
-The platform supports email communication through Gmail SMTP, including password-reset functionality.
+The platform supports email communication through Gmail SMTP.
+
+Email functionality includes password-reset communication and other application email services.
 
 ### International Learning Support
 
@@ -63,7 +66,7 @@ The landing page provides live time information for:
 - United Kingdom
 - United States
 
-This helps international students and parents understand the availability of live tutoring across different time zones.
+This helps parents and international students understand the availability of live tutoring across different time zones.
 
 ## Technology Stack
 
@@ -108,6 +111,7 @@ joshim/
 │
 ├── app/
 │   ├── models.py
+│   │
 │   ├── routes/
 │   │   ├── auth.py
 │   │   ├── student.py
@@ -129,20 +133,3 @@ joshim/
 ├── requirements.txt
 ├── run.py
 └── README.md
-## Screenshots
-
-### Joshim Homepage
-
-![Joshim Homepage](screenshots/homepage.png)
-
-### Course Management
-
-![Joshim Admin Dashboard](screenshots/admin.png)
-
-### Available Courses
-
-![Joshim Courses](screenshots/courses.png)
-
-### User Authentication
-
-![Joshim Login](screenshots/login.png)

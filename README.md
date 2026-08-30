@@ -129,3 +129,20 @@ joshim/
 ├── requirements.txt
 ├── run.py
 └── README.md
+## Screenshots
+
+### Joshim Homepage
+
+![Joshim Homepage](screenshots/homepage.png)
+
+### Course Management
+
+![Joshim Admin Dashboard](screenshots/admin.png)
+
+### Available Courses
+
+![Joshim Courses](screenshots/courses.png)
+
+### User Authentication
+
+![Joshim Login](screenshots/login.png)
